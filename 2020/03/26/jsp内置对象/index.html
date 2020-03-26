@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="## 一、JSP是什么，它有什么作用？Java Server Page，它是用于展示信息操作。 为了servlet展示信息的不方便，引入了JSP。 JSP本质上也是一个servlet JSP就是在HTML页面中嵌入了java代码。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jsp简介">
+<meta property="og:url" content="http://yoursite.com/2020/03/26/jsp%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1/index.html">
+<meta property="og:site_name" content="Lijun">
+<meta property="og:description" content="## 一、JSP是什么，它有什么作用？Java Server Page，它是用于展示信息操作。 为了servlet展示信息的不方便，引入了JSP。 JSP本质上也是一个servlet JSP就是在HTML页面中嵌入了java代码。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-26T06:31:28.000Z">
+<meta property="article:modified_time" content="2020-03-26T07:13:30.782Z">
+<meta property="article:author" content="Lijun">
+<meta property="article:tag" content="jsp">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/26/jsp%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>jsp简介 | Lijun</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Lijun</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/26/jsp%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lijun">
+      <meta itemprop="description" content="记录我的学习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lijun">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          jsp简介
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-26 14:31:28 / 修改时间：15:13:30" itemprop="dateCreated datePublished" datetime="2020-03-26T14:31:28+08:00">2020-03-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <pre><code>## 一、JSP是什么，它有什么作用？</code></pre><p>Java Server Page，它是用于展示信息操作。</p>
+<p>为了servlet展示信息的不方便，引入了JSP。</p>
+<p>JSP本质上也是一个servlet</p>
+<p>JSP就是在HTML页面中嵌入了java代码。</p>
+<a id="more"></a>
+
+<h2 id="二、JSP原理"><a href="#二、JSP原理" class="headerlink" title="二、JSP原理"></a>二、JSP原理</h2><p>在Tomcat中的web.xml中，有一个默认的servlet，处理不可以处理的请求，还有一个JSPservlet，又叫servlet引擎，所有后缀为.jsp的文件都处理。</p>
+<p>当浏览器访问<a href="http://localhost:8080/xxx/index.jsp" target="_blank" rel="noopener">http://localhost:8080/xxx/index.jsp</a> 服务器发现后缀为.jsp，它会根据路径找到index.jsp文件，会将index.jsp翻译成index_jsp.java文件，对这个java文件进行编译，产生一个index_jsp.class文件，将class文件加载运行。将JSP翻译成java文件，它是将JSP中的所有的HTML代码通过流进行输出，也就是说最终翻译成class，被虚拟机加载，它本质是servlet，它就会往回响应，响应回去就是把JSP中的HTML代码以流的方式写回浏览器。所以在JSP中展示出了HTML代码。</p>
+<p>当请求过来，这是第一步，到服务器端，服务器端处理了，找到hello.jsp，服务器怎么处理的，就是在Tomcat中的web.xml配置了一个JSP servlet引擎，根据后缀名，处理了，处理之后会找到这个JSP，然后对这个JSP做一个翻译的过程，把它翻译成了一个java文件，这个java文件会进行编译，编译以后变成class，而后被加载，加载后就执行，就把原来JSP里面的代码，即HTML代码以流的方式写回浏览器。</p>
+<p>work —&gt;  catalina —–&gt; localhost ——&gt; day9_1 ——&gt; index_JSP.java</p>
+<h2 id="三、怎么在JSP中书写java代码"><a href="#三、怎么在JSP中书写java代码" class="headerlink" title="三、怎么在JSP中书写java代码"></a>三、怎么在JSP中书写java代码</h2><table>
+<thead>
+<tr>
+<th align="left">标签</th>
+<th>语法</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">声明标签</td>
+<td>&lt;%! 变量或方法声明%&gt;</td>
+<td>声明JSP内所使用的全局变量或方法或内部类(它用于定义成员)(写的内容在成员位置上)</td>
+</tr>
+<tr>
+<td align="left">表达式</td>
+<td>&lt;%= 表达式 %&gt;</td>
+<td>输出java中变量或者表达式的值到页面上(它用于输出) out.print(内容)</td>
+</tr>
+<tr>
+<td align="left">程序代码标签</td>
+<td>&lt;%程序代码%&gt;</td>
+<td>编写java程序代码，但不可以定义代码（它用于定义局部）(声明的变量在局部位置_jspService方法中)</td>
+</tr>
+</tbody></table>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">page</span> <span class="attr">language</span>=<span class="string">"java"</span> <span class="attr">contentType</span>=<span class="string">"text/html; charset=UTF-8"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">pageEncoding</span>=<span class="string">"UTF-8"</span>%&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span> <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//W3C//DTD HTML 4.01 Transitional//EN"</span> <span class="meta-string">"http://www.w3.org/TR/html4/loose.dtd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=UTF-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Insert title here<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%!</span> <span class="attr">int</span> <span class="attr">i</span> = <span class="string">10;</span> %&gt;</span> <span class="comment">&lt;!-- 成员变量 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%!</span> <span class="attr">public</span> <span class="attr">void</span> <span class="attr">show</span>()&#123;&#125; %&gt;</span> <span class="comment">&lt;!-- 成员方法 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span> <span class="attr">int</span> <span class="attr">i</span> = <span class="string">100;</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%=</span> "<span class="attr">hello</span>" %&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：&lt;%! %&gt;中的内容，作为类的成员变量和成员函数，写在类的成员位置。</p>
+<p>&lt;% %&gt;中的内容，写在_jspService函数中。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">page</span> <span class="attr">language</span>=<span class="string">"java"</span> <span class="attr">contentType</span>=<span class="string">"text/html; charset=UTF-8"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">pageEncoding</span>=<span class="string">"UTF-8"</span>%&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span> <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//W3C//DTD HTML 4.01 Transitional//EN"</span> <span class="meta-string">"http://www.w3.org/TR/html4/loose.dtd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=UTF-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Insert title here<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%!</span> </span></span><br><span class="line"><span class="tag">	<span class="attr">int</span> <span class="attr">i</span> = <span class="string">10;</span></span></span><br><span class="line"><span class="tag">%&gt;</span> <span class="comment">&lt;!-- 成员变量 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%!</span> </span></span><br><span class="line"><span class="tag">	<span class="attr">public</span> <span class="attr">void</span> <span class="attr">show</span>()&#123;&#125; </span></span><br><span class="line"><span class="tag">%&gt;</span> <span class="comment">&lt;!-- 成员方法 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span> <span class="attr">int</span> <span class="attr">i</span> = <span class="string">100;</span> %&gt;</span></span><br><span class="line">输出函数中的i：<span class="tag">&lt;<span class="name">%=i%</span>&gt;</span></span><br><span class="line">输出成员变量i：<span class="tag">&lt;<span class="name">%=this.i</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>上面声明，下面可以直接用，因为被编译到一个类中，知道被编译的位置，就可以直接正确使用。</p>
+<p>如果把一个数据存在request域中（因为_jspService方法参数就是request和response，所以可以直接用），取值操作如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">page</span> <span class="attr">language</span>=<span class="string">"java"</span> <span class="attr">contentType</span>=<span class="string">"text/html; charset=UTF-8"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">pageEncoding</span>=<span class="string">"UTF-8"</span>%&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span> <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//W3C//DTD HTML 4.01 Transitional//EN"</span> <span class="meta-string">"http://www.w3.org/TR/html4/loose.dtd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=UTF-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Insert title here<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%request.setAttribute("name","tom");</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%=request.getAttribute("name")==null</span> ? "" <span class="attr">:</span> <span class="attr">request.getAttribute</span>("<span class="attr">name</span>") %&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">$&#123;requestScope.name&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="四、内置对象"><a href="#四、内置对象" class="headerlink" title="四、内置对象"></a>四、内置对象</h2><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>名称</th>
+<th>类型</th>
+<th>作用域</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>request</td>
+<td>请求对象</td>
+<td>javax.servlet.ServletRequest</td>
+<td>Request</td>
+</tr>
+<tr>
+<td>request</td>
+<td>响应对象</td>
+<td>javax.servlet.SrvletResponse</td>
+<td>Page</td>
+</tr>
+<tr>
+<td>pageContext</td>
+<td>页面上下文对象</td>
+<td>javax.servlet.jsp.PageContext</td>
+<td>Page</td>
+</tr>
+<tr>
+<td>session</td>
+<td>会话对象</td>
+<td>javax.servlet.http.HttpSession</td>
+<td>Session</td>
+</tr>
+<tr>
+<td>application</td>
+<td>应用程序对象</td>
+<td>javax.servlet.ServletContext</td>
+<td>Application</td>
+</tr>
+<tr>
+<td>out</td>
+<td>输出对象</td>
+<td>javax.servlet.jsp.JspWriter</td>
+<td>Page</td>
+</tr>
+<tr>
+<td>config</td>
+<td>配置对象</td>
+<td>javax.servlet.ServletConfig</td>
+<td>Page</td>
+</tr>
+<tr>
+<td>page</td>
+<td>页面对象</td>
+<td>javax.lang.Object</td>
+<td>Page</td>
+</tr>
+<tr>
+<td>exception</td>
+<td>例外对象</td>
+<td>javax.lang.Throwable</td>
+<td>Page</td>
+</tr>
+</tbody></table>
+<p>servletContext（application）：范围是整个web项目</p>
+<p>session：范围是一次会话</p>
+<p>request：范围是一次请求</p>
+<p>pageContext：范围是当前页面</p>
+<h2 id="五、el表达式"><a href="#五、el表达式" class="headerlink" title="五、el表达式"></a>五、el表达式</h2><p>EL 语法很简单，它最大的特点就是使用上很方便。接下来介绍EL主要的语法结构：</p>
+<p>${sessionScope.user.sex}</p>
+<p>所有EL都是以${为起始、以}为结尾的。上述EL范例的意思是：从Session的范围中，取得</p>
+<p>用户的性别。假若依照之前JSP Scriptlet的写法如下：</p>
+<p>User user =(User)session.getAttribute(“user”);</p>
+<p>String sex =user.getSex( );</p>
+<p>两者相比较之下，可以发现EL 的语法比传统JSP Scriptlet 更为方便、简洁。</p>
+<p>EL表达式是配合JSTL使用的。你需要引入JSTL标签库(&lt;c:forEach items=””&gt;&lt;</c:forEach>&gt;,&lt;c:if test=””&gt;</c:if>等属于jstl表达式)</p>
+<p><strong>&lt;%@taglib uri=” jsp标签的命名空间 “ prefix=”c”%&gt;</strong></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/jsp/" rel="tag"># jsp</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/23/ssm%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" rel="prev" title="ssm环境搭建">
+      <i class="fa fa-chevron-left"></i> ssm环境搭建
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#二、JSP原理"><span class="nav-number">1.</span> <span class="nav-text">二、JSP原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、怎么在JSP中书写java代码"><span class="nav-number">2.</span> <span class="nav-text">三、怎么在JSP中书写java代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、内置对象"><span class="nav-number">3.</span> <span class="nav-text">四、内置对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、el表达式"><span class="nav-number">4.</span> <span class="nav-text">五、el表达式</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Lijun</p>
+  <div class="site-description" itemprop="description">记录我的学习</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/5sssss" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;5sssss" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/15723439231@163.com" title="E-Mail → 15723439231@163.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/1040815977" title="QQ → 1040815977"><i class="fa fa-fw fa-qq"></i>QQ</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lijun</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
